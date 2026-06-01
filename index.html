@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>75-Ball Bingo Call & Check Demo</title>
+    <link rel="stylesheet" href="bingo-demo.css">
+</head>
+<body>
+    <main class="app-shell">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Private local demo</p>
+                <h1>75-Ball Bingo Call & Check</h1>
+            </div>
+            <div class="status-pill" id="gameStatus">Setup required</div>
+        </header>
+
+        <section class="workspace" aria-label="Bingo application">
+            <aside class="control-panel" aria-label="Game controls">
+                <section class="panel-section">
+                    <h2>Panel / Ticket Range</h2>
+                    <label class="full-field">
+                        Panel
+                        <select id="panelSelect">
+                            <option value="1-750">Panel A: Tickets 1-750</option>
+                            <option value="751-1500">Panel B: Tickets 751-1,500</option>
+                            <option value="1501-2250">Panel C: Tickets 1,501-2,250</option>
+                            <option value="2251-3000">Panel D: Tickets 2,251-3,000</option>
+                            <option value="1-3000">All tickets</option>
+                        </select>
+                    </label>
+                    <div class="range-grid">
+                        <label>
+                            Start ticket
+                            <input id="rangeStart" type="number" min="1" max="3000" value="1">
+                        </label>
+                        <label>
+                            End ticket
+                            <input id="rangeEnd" type="number" min="1" max="3000" value="120">
+                        </label>
+                    </div>
+                    <button class="primary-action" id="loadRangeBtn" type="button">Load Selected Tickets</button>
+                    <p class="quiet" id="ticketSummary">3,000 tickets preloaded in browser memory.</p>
+                </section>
+
+                <section class="panel-section">
+                    <h2>Winning Pattern</h2>
+                    <div class="segmented" role="group" aria-label="Pattern selector">
+                        <button class="segment active" type="button" data-pattern="topRow">Top Row</button>
+                        <button class="segment" type="button" data-pattern="x">X</button>
+                        <button class="segment" type="button" data-pattern="blackout">Blackout</button>
+                        <button class="segment" type="button" data-pattern="custom">Custom</button>
+                    </div>
+                    <div class="custom-builder" id="customBuilder" aria-label="Custom pattern builder">
+                        <p class="quiet">Click squares to define a custom pattern.</p>
+                        <div class="pattern-grid" id="patternGrid"></div>
+                    </div>
+                </section>
+
+                <section class="panel-section">
+                    <h2>Manual Call</h2>
+                    <div class="call-row">
+                        <input id="manualNumber" type="number" min="1" max="75" placeholder="1-75">
+                        <button class="primary-action" id="callBtn" type="button">Call</button>
+                    </div>
+                    <button class="secondary-action" id="resetBtn" type="button">Reset Game</button>
+                </section>
+
+            </aside>
+
+            <section class="main-panel">
+                <section class="caller-strip" aria-label="Called number controls">
+                    <div>
+                        <p class="eyebrow">Current call</p>
+                        <div class="called-number" id="currentCall">--</div>
+                    </div>
+                    <div class="call-stats">
+                        <span><strong id="calledCount">0</strong> called</span>
+                        <span><strong id="selectedCount">0</strong> tickets active</span>
+                        <span><strong id="winnerCount">0</strong> winners</span>
+                    </div>
+                </section>
+
+                <section class="number-board" aria-label="Manual number board" id="numberBoard"></section>
+
+                <section class="winner-banner" id="winnerBanner" hidden>
+                    <div>
+                        <p class="eyebrow">Winner detected</p>
+                        <h2 id="winnerTitle">Ticket matched the pattern</h2>
+                        <p id="winnerDetails"></p>
+                    </div>
+                    <button class="secondary-action" id="dismissWinnerBtn" type="button">Review Board</button>
+                </section>
+
+                <section class="tickets-section">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">Live validation</p>
+                            <h2>Ticket Preview</h2>
+                        </div>
+                        <p class="quiet">Showing the first 12 active tickets. All selected tickets are checked in real time.</p>
+                    </div>
+                    <div class="ticket-grid" id="ticketGrid"></div>
+                </section>
+            </section>
+        </section>
+    </main>
+
+    <script src="bingo-demo.js"></script>
+</body>
+</html>
